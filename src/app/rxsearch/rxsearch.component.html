@@ -1,0 +1,93 @@
+<div class="content"></div>
+<div class="container" style="padding-left: 150px; padding-top: 100px;">
+    <h1 style="font-size: 80px; margin-bottom: 80px; margin-left: 60px;">Formulary Insite Tool</h1>
+
+  <!-- Inline Check -->
+  <h4 style="margin-left: 280px;">Select a health plan type:</h4>
+  <div class="form-check-inline mb-3 mt-2" style="margin-left: 120px;" *ngFor="let plan of PlanType">
+    <!-- <input class="form-check-input" type="radio" id="medicaid" name="planOptions" (change)="onPlanTypeSelected(1)">
+    <label class="form-check-label" for="medicaid" style="font-size: large; margin-right: 10px;">Medicaid</label>
+
+    <input class="form-check-input" type="radio" id="medicare" name="planOptions" (change)="onPlanTypeSelected(2)">
+    <label class="form-check-label" for="medicare" style="font-size: large; margin-right: 10px;">Medicare</label>
+
+    <input class="form-check-input" type="radio" id="commercial" name="planOptions" (change)="onPlanTypeSelected(3)">
+    <label class="form-check-label" for="commercial" style="font-size: large; margin-right: 10px;">Commercial</label> -->
+    <input class="form-check-input" type="radio" id="medicaid" name="planOptions" (change)="onPlanTypeSelected(plan.id)">
+    <label class="form-check-label" for="medicaid" style="font-size: large;">{{plan.type}}</label>
+  </div>
+
+  <!------------------ Medicaid / Commercial ------------------------>
+  <!--- Medicare/Commercial Plan Live Search -->
+  <div class="ng-autocomplete"  *ngIf="planId === 1 || planId === 3" style="margin-left: 120px;">
+    <ng-autocomplete 
+      [data]="filteredPlans" 
+      [searchKeyword]="'name'" 
+      (selected)='selectEvent($event)'
+      [itemTemplate]="planTemplate"
+      [notFoundTemplate]="planNotFoundTemplate"
+      [placeHolder]="'Search Plan Name'">
+    </ng-autocomplete>
+
+    <ng-template #planTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #planNotFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
+
+  <div class="ng-autocomplete"  *ngIf="(planId === 1 || planId === 3) && planTypeId" style="margin-left: 120px;">
+    <ng-autocomplete 
+      [data]="medicaidCommMedications" 
+      [(ngModel)]="medicaidMedication" 
+      [searchKeyword]="'productDescription'" 
+      (inputChanged)='onChangeSearch($event)'
+      (ngModelChange)="onMedicationSelect($event)" 
+      [itemTemplate]="drugTemplate"
+      [notFoundTemplate]="drugNotFoundTemplate"
+      [placeHolder]="'Search Drug Name'"
+      >
+    </ng-autocomplete>
+
+    <ng-template #drugTemplate let-item>
+      <a [innerHTML]="item.productDescription"></a>
+    </ng-template>
+
+    <ng-template #drugNotFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
+
+  <div *ngIf="(planId === 1 || planId === 3) && relatedMedications" style="margin-left: 5px; margin-top: 80px;">
+    <app-rxgrid [gridDataSource]=relatedMedications (searchValue)="onMedicationSelect($event)"></app-rxgrid>
+  </div>
+
+<!------------------ Medicaid / Commercial End ------------------------>
+
+    <div *ngIf="planId === 2" style="margin-left: 120px;">
+      <input type="text" class="form-control" (change)='onZipCodeSearch($event)' placeholder="Enter 5 digit zip code"/>
+    </div>
+
+    <!--- Medicare Plan Live Search -->
+    <div class="ng-autocomplete" *ngIf="locationInfo" style="margin-left: 120px;">
+      <ng-autocomplete [data]="filteredPlans" [searchKeyword]="'name'" (selected)='selectEvent($event)'
+        [itemTemplate]="planTemplate" [notFoundTemplate]="planNotFoundTemplate" [placeHolder]="'Search Medicare Plan by Name'">
+      </ng-autocomplete>
+    
+      <ng-template #planTemplate *ngFor="let item of filteredPlans">
+        <a [innerHTML]="item.planName"></a>
+      </ng-template>
+    
+      <ng-template #planNotFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+      </ng-template>
+    </div>
+
+  <div class="form-check-inline mb-3 mt-5" style="margin-left: 150px;">
+    <button class="btn btn-primary">View Formulary Coverage</button>
+    <button class="btn btn-primary ml-4">Clear Medication</button>
+    <button class="btn btn-primary ml-4">Clear All</button>
+  </div>
+</div>

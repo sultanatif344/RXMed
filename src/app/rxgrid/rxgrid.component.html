@@ -1,0 +1,56 @@
+    <mat-table [dataSource]="gridDataSource" class="drug-table mat-elevation-z8">
+
+        <!-- <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+        </ng-container> -->
+
+        <!-- <ng-container matColumnDef="rxcui">
+            <mat-header-cell *matHeaderCellDef>RXCUI</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.rxcui}}</mat-cell>
+        </ng-container> -->
+
+        <ng-container matColumnDef="productDescription">
+            <mat-header-cell *matHeaderCellDef>Drug Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.productDescription}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="formularyRestriction">
+            <mat-header-cell *matHeaderCellDef>Formulary Restriction</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.formularyRestriction}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tier">
+            <mat-header-cell *matHeaderCellDef>Tier</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.tier}}</mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="excludedDrugsBack">
+            <mat-header-cell *matHeaderCellDef>Excluded Drugs Back</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.excludedDrugsBack}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="relatedDrugs">
+            <mat-header-cell *matHeaderCellDef>Related Drugs</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.relatedDrugs}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tty">
+            <mat-header-cell *matHeaderCellDef>TTY</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.tty}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="scd">
+            <mat-header-cell *matHeaderCellDef>SCD</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.scd}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="sbd">
+            <mat-header-cell *matHeaderCellDef>SBD</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.sbd}}</mat-cell>
+        </ng-container> -->
+
+        <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+    </mat-table>

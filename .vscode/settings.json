@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/412893f3-5db3-436a-9180-3030b2d087c6/resourceGroups/RxMedAccess/providers/Microsoft.Web/sites/RxMedWeb",
+    "appService.deploySubpath": "dist\\RxMedWeb"
+}
